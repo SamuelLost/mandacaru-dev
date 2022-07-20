@@ -32,7 +32,7 @@
 <!-- 	</form> -->
 
 	<!-- POST - esconde os parametros da URL-->
-	<form action="main.jsp" method="GET">
+	<form action="main.jsp" method="POST">
 		First Name: <input type="text" name="first_name"> <br />
 		Last Name: <input type="text" name="last_name" /> <br /> 
 		
