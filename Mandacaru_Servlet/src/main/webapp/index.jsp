@@ -53,7 +53,7 @@
 <!-- 		<input type="submit" value="Submit" /> -->
 <!-- 	</form> -->
 
-	<form action="Hello" method="POST"> <!-- Passa como array -->
+	<form action="ok" method="POST"> <!-- Passa como array -->
         First Name: <input type="text" name="first_name"> <br /> 
         Last Name: <input type="text" name="last_name" /> <br />
         <input type = "checkbox" name="subject" value = "maths" checked = "checked" /> Maths
