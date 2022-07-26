@@ -7,8 +7,80 @@
 </head>
 <body>
 
-	<p th:text="|Hello, ${name}!|"></p>
-	<p th:text="|${hello}!|"></p>
+<!-- 	<p th:text="|Hello, ${name}!|"></p> -->
+<!-- 	<p th:text="|${hello}!|"></p> -->
 
+<!-- 	<h2>Variable Expression</h2> -->
+<!-- 	<p th:text="${person.id}">ID:</p> -->
+<!-- 	<p th:text="${person.name}">Name:</p> -->
+<!-- 	<p>Address</p> -->
+<!-- 	<p th:text="${person.address.street}">Street:</p> -->
+<!-- 	<p th:text="${person.address.zipcode}">Zipcode:</p> -->
+
+<!-- 	<h2>Selection Variable expression</h2> -->
+<!-- 	<div th:object="${person}"> Pega o objeto -->
+<!-- 		<p th:text="*{id}">ID:</p> -->
+<!-- 		<p th:text="*{name}">Name:</p> -->
+<!-- 		<p>Address</p> -->
+<!-- 		<p th:text="*{address.street}">Street:</p> -->
+<!-- 		<p th:text="*{address.zipCode}">Zipcode:</p> -->
+<!-- 	</div> -->
+
+<!-- 	<h2>Link URL Expression</h2> -->
+<!-- 	<p> -->
+<!-- 		<a href="#" th:href="@{/user/1}">Link 1</a> -->
+<!-- 	</p> -->
+<!-- 	<p> -->
+<!-- 		<a href="#" th:href="@{/user(id=${person.id}, -->
+<!-- name=${person.name})}">Query -->
+<!-- 			String URL </a> -->
+<!-- 	</p> -->
+<!-- 	<p> -->
+<!-- 		<a href="#" -->
+<!-- 			th:href="@{/user/{uid}/name/{uname}(uid=${person.id}, -->
+<!-- uname=${person.name})}">Path -->
+<!-- 			Variable URL </a> -->
+<!-- 	</p> -->
+
+	<h1>Conditional Expression</h1>
+<!-- 	<h2>If-then</h2> -->
+<!-- 	<p th:text="${person1.address} ? ${person1.address.street}">Default -->
+<!-- 		person1 Street</p> -->
+<!-- 	<p th:text="${person2.address} ? ${person2.address.street}">Default -->
+<!-- 		person2 Street</p> -->
+		
+<!-- 	<h2>If-then-else </h2> -->
+<!-- 	<p th:text="${person1.address} ? ${person1.address.street} : 'not exist'">Default -->
+<!-- 		Zipcode 1</p> -->
+<!-- 	<p th:text="${person2.address} ? ${person1.address.street} : 'Person2 does not have an address'">Default -->
+<!-- 		Zipcode 2</p> -->
+		
+<!-- 	<h2>Elvis Operator </h2> Pergunta e ja mostra o objeto da pergunta -->
+<!-- 	<p th:text="${person1.address}?:'not exist'" >Default address1 </p> -->
+<!-- 	<p th:text="${person2.address}?:'Person2 does not have an -->
+<!-- 		address...'" >Default address2 </p> -->
+		
+<!-- 	<h2>If-Unless</h2> Unless é como se fosse uma negação da condição -->
+<!-- 	<p th:if="${person1.id == 1}" th:text="${person1.address}" ></p> -->
+<!-- 	<p th:unless ="${person2.id == 1}" th:text="${person2.address}" ></p> -->
+
+	<h1>Iteration Expression</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">ID</th>
+				<th scope="col">Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p, iter : ${people}"> <!-- for each -->
+				<th scope="row" th:text="${iter.index + 1}">1</th> <!-- iter serve para pegar o index dentro da lista
+				e mapear na coluna da tabela -->
+				<td th:text="${p.id}">1</td>
+				<td th:text="${p.name}">Otto</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>
