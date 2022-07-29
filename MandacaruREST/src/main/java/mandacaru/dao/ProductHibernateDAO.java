@@ -62,7 +62,7 @@ public class ProductHibernateDAO implements ProductDAO {
 
 		try {
 			product = entityManager.createQuery("from products where name=?1", Product.class).setParameter(1, str)
-					.getSingleResult();
+					.setMaxResults(1).getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}

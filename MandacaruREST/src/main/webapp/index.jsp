@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mandacaru</title>
+<title>MandacaruREST</title>
 </head>
 <body>
 	<h2>Webservice REST</h2>

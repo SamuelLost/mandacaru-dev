@@ -41,6 +41,14 @@ public class ProductController {
     public Product getByName(@QueryParam("name") String name) {
         return productDAO.findByName(name);
     }
+    
+    @GET
+    @Path("/searchs")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getAllByName(@QueryParam("name") String name) {
+//        return productDAO.findByName(name);
+    	return productDAO.findAllByName(name);
+    }
  
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
