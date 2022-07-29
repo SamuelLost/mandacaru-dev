@@ -11,7 +11,7 @@ public class ProductHibernateDAO implements ProductDAO {
 	//nome do persistence-unit é passado
 	static EntityManagerFactory sessionFactory = Persistence.createEntityManagerFactory("mandacaru");
 	static EntityManager entityManager;
-
+	//Utilizando o Postman
 	@Override
 	public void save(Product entity) {
 		entityManager = sessionFactory.createEntityManager();
