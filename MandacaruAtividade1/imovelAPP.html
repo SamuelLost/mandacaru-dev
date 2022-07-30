@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade 1</title>
+<script src="https://unpkg.com/vue@2.7.7/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<p>Aluno: Samuel Henrique - Campus Quixadá - samuelhenriqec@alu.ufc.br</p>
+	<h2>Atividade 1 - API REST - Imóveis</h2>
+	<div id="app">
+		<div>
+			ID: <input type="text" name="" id="" v-model="id" />
+			<button @click="fetchImoveis">Buscar Imóveis</button>
+			<br />
+			<br /> Título: <input type="text" name="" id="" v-model="titulo" />
+			<button @click="fetchImovelById">Buscar Imóveis pelo ID</button>
+			<br />
+			<br /> Endereço: <input type="text" name="" id="" v-model="endereco" />
+			<button @click="fetchImovelByName">Buscar Imóveis pelo título</button>
+			<br />
+			<br /> Bairro: <input type="text" name="" id="" v-model="bairro" />
+			<button @click="fetchImovelByAddress">Buscar Imóveis pelo endereço</button>
+			<br />
+			<br /> Número: <input type="text" name="" id="" v-model="numero" />
+			<button @click="postImovel">Cadastrar Imóvel</button>
+			<br />
+			<br /> Tamanho: <input type="text" name="" id="" v-model="metrosQuadrados" />
+			<button @click="putImovel">Atualizar Imóvel</button>
+			<br />
+			<br /> Tamanho construído: <input type="text" name="" id="" v-model="metrosConstruidos" />
+			<button @click="deleteImovelById">Remover Imóvel</button>
+			<br />
+			<br /> Quartos: <input type="text" name="" id="" v-model="quartos" />
+			<br />
+			<br /> Banheiros: <input type="text" name="" id="" v-model="banheiros" />
+			<br />
+			<br /> Garagem: <input type="text" name="" id="" v-model="garagem" />
+			<br />
+			<br /> Preço: <input type="price" name="" id="" v-model="preco" />
+			<br />
+			<br />
+
+
+
+
+			<p>{{ imovel }}</p>
+
+			<ul>
+				<li v-for="imovel in imoveis" :key="imovel.id">
+					<h4>ID: {{ imovel.id }}</h4>
+					<p>Título: {{ imovel.titulo }}</p>
+					<p>Endereço: {{ imovel.endereco }}</p>
+					<p>Bairro: {{ imovel.bairro }}</p>
+					<p>Número: {{ imovel.numero }}</p>
+					<p>Tamanho: {{ imovel.metrosQuadrados }}</p>
+					<p>Tamanho Construído: {{ imovel.metrosConstruidos }}</p>
+					<p>Quartos: {{ imovel.quartos }}</p>
+					<p>Banheiros: {{ imovel.banheiros }}</p>
+					<p>Garagem: {{ imovel.garagem }}</p>
+					<p>Preço: {{ imovel.preco }}</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                id: 0,
+                titulo: "",
+                endereco: "",
+                bairro: "",
+                numero: "",
+                metrosQuadrados: "",
+                metrosConstruidos: "",
+                quarto: "",
+                banheiros: "",
+                garagem: "",
+                preco: "",
+                imovel: {},
+                imoveis: [],
+                baseURI: "http://localhost:8080/MandacaruAtividade1/api/imoveis",
+            },
+            methods: {
+                fetchImoveis: function () {
+                    axios.get(this.baseURI).then((result) => {
+                        this.imoveis = result.data;
+                    });
+                },
+                fetchImovelById: function () {
+                    axios
+                        .get(this.baseURI + "/" + this.id)
+                        .then((result) => {
+                            this.imovel = result.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                fetchImovelByName: function () {
+                    axios
+                        .get(this.baseURI + "/search?titulo=" + this.titulo)
+                        .then((result) => {
+                            this.imovel = result.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                fetchImovelByAddress: function () {
+                    axios
+                        .get(this.baseURI + "/searchEndereco?endereco=" + this.endereco)
+                        .then((result) => {
+                            this.imovel = result.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                postImovel: function () {
+                    let obj = {
+                        titulo: this.titulo,
+                        endereco: this.endereco,
+                        bairro: this.bairro,
+                        numero: parseInt(this.numero),
+                        metrosQuadrados: parseFloat(this.metrosQuadrados),
+                        metrosConstruidos: parseFloat(this.metrosConstruidos),
+                        quartos: this.quartos,
+                        banheiros: this.banheiros,
+                        garagem: this.garagem,
+                        preco: parseFloat(this.preco),
+                    };
+
+                    axios.post(this.baseURI, new URLSearchParams(obj), {
+                        'Content-Type': 'application/x-www-form-urlencoded;'
+                    }).then((result) => {
+                        this.imovel = result.data;
+                    });
+                },
+                putImovel: function () {
+                	let obj = {
+                		titulo: this.titulo,
+                        endereco: this.endereco,
+                        bairro: this.bairro,
+                        numero: parseInt(this.numero),
+                        metrosQuadrados: parseFloat(this.metrosQuadrados),
+                        metrosConstruidos: parseFloat(this.metrosConstruidos),
+                        quartos: this.quartos,
+                        banheiros: this.banheiros,
+                        garagem: this.garagem,
+                        preco: parseFloat(this.preco),
+                    };
+
+                    axios.put(this.baseURI + "/" + this.id, new URLSearchParams(obj), {
+                        'Content-Type': 'application/x-www-form-urlencoded;'
+                    }).then((result) => {
+                        this.imovel = result.data;
+                    });
+                },
+                deleteImovelById: function () {
+                    axios.delete(this.baseURI + "/" + this.id).then((result) => {
+                        console.log(result.status);
+                    });
+                },
+            },
+        });
+    </script>
+
+</body>
+
+</html>

@@ -62,7 +62,7 @@ public class ImovelHibernateDAO implements ImovelDAO{
 		Imovel product = null;
 
 		try {
-			product = entityManager.createQuery("from imoveis where name=?1", Imovel.class).setParameter(1, str)
+			product = entityManager.createQuery("from imoveis where titulo=?1", Imovel.class).setParameter(1, str)
 					.setMaxResults(1).getSingleResult();
 		} catch (Exception e) {
 			return null;
@@ -78,7 +78,7 @@ public class ImovelHibernateDAO implements ImovelDAO{
 		List<Imovel> products = null;
 
 		try {
-			products = entityManager.createQuery("from imoveis where name=?1", Imovel.class).setParameter(1, str)
+			products = entityManager.createQuery("from imoveis where endereco=?1", Imovel.class).setParameter(1, str)
 					.getResultList();
 		} catch (Exception e) {
 			return null;

@@ -39,8 +39,8 @@ public class ImovelController {
 	@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Imovel getByName(@QueryParam("titulo") String name) {
-		return imovelDAO.findByName(name);
+	public Imovel getByName(@QueryParam("titulo") String titulo) {
+		return imovelDAO.findByName(titulo);
 	}
 	
 	@GET
@@ -54,7 +54,7 @@ public class ImovelController {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public void addImovel(@FormParam("id") int id, @FormParam("titulo") String titulo, @FormParam("endereco") String endereco, 
 			@FormParam("bairro") String bairro, @FormParam("numero") int numero, @FormParam("metrosQuadrados") double tamanho,
-			@FormParam("metrosContruidos") double construido, @FormParam("quartos") int quartos, @FormParam("banheiros")
+			@FormParam("metrosConstruidos") double construido, @FormParam("quartos") int quartos, @FormParam("banheiros")
 			int banheiros, @FormParam("garagem") int garagem, @FormParam("preco") double preco) {
 		
 		Imovel imovel = new Imovel(0, titulo, endereco, bairro, numero, tamanho, construido, quartos, banheiros, garagem, preco);
@@ -64,9 +64,9 @@ public class ImovelController {
 	@PUT
     @Path("/{id}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void updateImovel(@FormParam("id") int id, @FormParam("titulo") String titulo, @FormParam("endereco") String endereco, 
+	public void updateImovel(@PathParam("id") int id, @FormParam("titulo") String titulo, @FormParam("endereco") String endereco, 
 			@FormParam("bairro") String bairro, @FormParam("numero") int numero, @FormParam("metrosQuadrados") double tamanho,
-			@FormParam("metrosContruidos") double construido, @FormParam("quartos") int quartos, @FormParam("banheiros")
+			@FormParam("metrosConstruidos") double construido, @FormParam("quartos") int quartos, @FormParam("banheiros")
 			int banheiros, @FormParam("garagem") int garagem, @FormParam("preco") double preco) {
 		
 		Imovel imovel = new Imovel(id, titulo, endereco, bairro, numero, tamanho, construido, quartos, banheiros, garagem, preco);
