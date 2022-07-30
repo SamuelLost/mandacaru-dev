@@ -4,9 +4,11 @@ package mandacaru.controller;
 import java.util.List;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -55,8 +57,26 @@ public class ImovelController {
 			@FormParam("metrosContruidos") double construido, @FormParam("quartos") int quartos, @FormParam("banheiros")
 			int banheiros, @FormParam("garagem") int garagem, @FormParam("preco") double preco) {
 		
+		Imovel imovel = new Imovel(0, titulo, endereco, bairro, numero, tamanho, construido, quartos, banheiros, garagem, preco);
+		imovelDAO.save(imovel);
+	}
+	
+	@PUT
+    @Path("/{id}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public void updateImovel(@FormParam("id") int id, @FormParam("titulo") String titulo, @FormParam("endereco") String endereco, 
+			@FormParam("bairro") String bairro, @FormParam("numero") int numero, @FormParam("metrosQuadrados") double tamanho,
+			@FormParam("metrosContruidos") double construido, @FormParam("quartos") int quartos, @FormParam("banheiros")
+			int banheiros, @FormParam("garagem") int garagem, @FormParam("preco") double preco) {
+		
 		Imovel imovel = new Imovel(id, titulo, endereco, bairro, numero, tamanho, construido, quartos, banheiros, garagem, preco);
 		imovelDAO.save(imovel);
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	public void deleteImovel(@PathParam("id") int id) {
+		imovelDAO.delete(id);
 	}
 	
 }
