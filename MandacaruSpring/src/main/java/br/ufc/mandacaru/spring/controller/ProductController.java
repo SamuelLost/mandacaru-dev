@@ -22,7 +22,7 @@ import br.ufc.mandacaru.spring.service.ProductService;
 @RequestMapping(path = "/api/products")
 public class ProductController {
 
-	@Autowired
+	@Autowired //já faz a injeção de dependencia
 	ProductService service;
 
 	@GetMapping
@@ -32,8 +32,13 @@ public class ProductController {
 
 	@GetMapping(path = "{id}")
 	public ResponseEntity<Product> find(@PathVariable("id") int id) {
-		return new ResponseEntity<Product>(service.find(id), HttpStatus.OK);
-	}
+		Product product = service.find(id);
+		if(product != null)
+			return new ResponseEntity<Product>(service.find(id), HttpStatus.OK);
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	} 
 
 	@GetMapping(path = "/search")
 	public ResponseEntity<Product> findByName(@RequestParam("name") String name) {
