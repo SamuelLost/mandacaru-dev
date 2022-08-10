@@ -51,8 +51,8 @@ public class ProductService {
             return null;
         }
         
-//        return productRepository.findFirstByName(str);
-        return productRepository.getAlmada(str);
+        return productRepository.findFirstByName(str);
+//        return productRepository.getAlmada(str);
     }
  
     public List<Product> findAllByName(String str) {
