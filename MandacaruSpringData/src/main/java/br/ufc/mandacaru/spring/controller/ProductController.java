@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufc.mandacaru.spring.model.Product;
+import br.ufc.mandacaru.spring.dto.ProductDTO;
 import br.ufc.mandacaru.spring.service.ProductService;
 
 @RestController
@@ -26,38 +26,38 @@ public class ProductController {
 	ProductService service;
 
 	@GetMapping
-	public ResponseEntity<List<Product>> findAll() {
-		return new ResponseEntity<List<Product>>(service.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<ProductDTO>> findAll() {
+		return new ResponseEntity<List<ProductDTO>>(service.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping(path = "{id}")
-	public ResponseEntity<Product> find(@PathVariable("id") int id) {
-		Product product = service.find(id);
+	public ResponseEntity<ProductDTO> find(@PathVariable("id") int id) {
+		ProductDTO product = service.find(id);
 		if(product != null)
-			return new ResponseEntity<Product>(service.find(id), HttpStatus.OK);
+			return new ResponseEntity<ProductDTO>(service.find(id), HttpStatus.OK);
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	} 
 
 	@GetMapping(path = "/search")
-	public ResponseEntity<Product> findByName(@RequestParam("name") String name) {
-		Product product = service.findByName(name);
+	public ResponseEntity<ProductDTO> findByName(@RequestParam("name") String name) {
+		ProductDTO product = service.findByName(name);
 		
 		if(product != null) {
-			return new ResponseEntity<Product>(product, HttpStatus.OK);	
+			return new ResponseEntity<ProductDTO>(product, HttpStatus.OK);	
 		} else {
-			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ProductDTO>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping
-	public void save(@RequestBody Product product) {
+	public void save(@RequestBody ProductDTO product) {
 		service.save(0, product);
 	}
 
 	@PutMapping(path = "{id}")
-	public void update(@PathVariable("id") int id, @RequestBody Product product) {
+	public void update(@PathVariable("id") int id, @RequestBody ProductDTO product) {
 		service.save(id, product);
 	}
 
